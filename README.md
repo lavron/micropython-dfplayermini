@@ -8,21 +8,17 @@ Module specification and pins reference is [here](https://wiki.dfrobot.com/DFPla
 ## Methods
 
 Playback control:
-* play(*track_id)
-track_id, 'next' or 'prev'
+* play(*track_id) # track_id, 'next' or 'prev'
 * pause()
 * resume()
 * loop_track(track_id)
 * loop()
 * loop_disable()
 * stop()
-Fadeout (non-blocking) and stop
-* fadeout(*fadeout_ms)
+* fadeout(*fadeout_ms) # non-blocking fadeout and stop
 
 Volume control:
-* volume(*level)
-set volume level to 'level'
-return volume level.
+* volume(*level) # return volume level
 
 Module control:
 * module_sleep()
