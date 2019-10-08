@@ -52,16 +52,13 @@ from time import sleep
 
 music = Player(pin_TX=17, pin_RX=16)
 
-music.set_volume(20)
-music.play_track(1)
+music.volume(20)
+music.play(1)
 sleep(10)
 
-music.play_next()
-sleep(10)
+music.fadeout(2000)
 
-music.stop(fadeout_ms = 1000)
-
-music.play_track(2)
+music.play(2)
 music.loop()
 sleep(20)
 
