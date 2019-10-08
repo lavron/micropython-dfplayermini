@@ -8,6 +8,7 @@ Module specification and pins reference is [here](https://wiki.dfrobot.com/DFPla
 ## Methods
 
 Playback control:
+```python
 * play(*track_id) # track_id, 'next' or 'prev'
 * pause()
 * resume()
@@ -16,14 +17,19 @@ Playback control:
 * loop_disable()
 * stop()
 * fadeout(*fadeout_ms) # non-blocking fadeout and stop
+```
 
 Volume control:
+```python
 * volume(*level) # return volume level
+```
 
 Module control:
+```python
 * module_sleep()
 * module_wake()
 * module_reset()
+```
 
 ## Wiring
 
