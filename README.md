@@ -1,6 +1,7 @@
 # DFPlayer Mini: simple mp3 player for micropython
 
-Micropython implementation of DFRobot DFPlayer Mini. Tested on ESP32 boards (Lolin32, Waveshare ESP32 driver board, DOIT ESP32DEVKIT).
+Asynchronous micropython library for control of DFRobot DFPlayer Mini. 
+Tested on ESP32 boards (Lolin32, Waveshare ESP32 driver board, DOIT ESP32DEVKIT)
 
 Module specification and pins reference is [here](https://wiki.dfrobot.com/DFPlayer_Mini_SKU_DFR0299).
 
@@ -12,15 +13,16 @@ Playback control:
 * play_previous()
 * pause()
 * resume()
-* stop()
 * loop_track(track_id)
 * loop()
 * loop_disable()
+Fadeout (non-blocking) and stop
+* stop(*fadeout_ms)
 
 Volume control:
-* volume_up()
-* volume_down()
-* set_volume(volume)
+* volume(*level)
+set volume level to 'level'
+return volume level.
 
 Module control:
 * module_sleep()
@@ -57,7 +59,7 @@ sleep(10)
 music.play_next()
 sleep(10)
 
-music.pause()
+music.stop(fadeout_ms = 1000)
 
 music.play_track(2)
 music.loop()
@@ -65,9 +67,6 @@ sleep(20)
 
 music.module_sleep()
 ```
-## Authors
-
-**Viktor Lavron** - *Initial work* - [github](https://github.com/lavron)
 
 ## License
 

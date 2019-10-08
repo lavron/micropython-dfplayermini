@@ -4,10 +4,12 @@ from time import sleep
 
 music = Player(pin_TX=17, pin_RX=16)
 
-music.set_volume(20)
+music.volume(20)
 
 music.play_track(1)
 sleep(10)
+
+music.stop(fadeout_ms = 2000)
 
 music.play_next()
 sleep(10)
