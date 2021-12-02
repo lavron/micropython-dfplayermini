@@ -1,4 +1,5 @@
 import utime
+import ubinascii
 from machine import UART, Timer
 
 IDLE = 0
@@ -43,6 +44,21 @@ class Player:
             self.cmd(0x02)
         elif isinstance(track_id, int):
             self.cmd(0x03, track_id)
+
+    def num_tracks_sd(self):
+        print(f'throw away current serial input buffer: {self.uart.read()}')
+        self.cmd(0x48)
+        utime.sleep(0.5)
+        response = self.uart.read()
+        # TODO:
+        # - error handling for sd card communication
+        # - properly parse response with correct opcode
+        #   instead of just throwing them away and guessing
+        #   that the number is in between 7eff0648 and fea8ef
+        #   with typical response being b'7eff064800000bfea8ef'
+        #   where the number of tracks on the SD card is
+        #   '00000b' in hex (11 in decimal)
+        return int(ubinascii.hexlify(response)[8:-6], 16)
 
     def pause(self):
         self.cmd(0x0E)
