@@ -16,9 +16,9 @@ class Player:
         self._max_volume = 15
         self._fadeout_speed = 0
 
-    def cmd(self, command, parameter=0x00):
+    def cmd(self, command, parameter=0x00, highparameter=0x00):
         query = bytes([0x7e, 0xFF, 0x06, command,
-                       0x00, 0x00, parameter, 0xEF])
+                       0x00, highparameter, parameter, 0xEF])
         self.uart.write(query)
 
     def _fade_out_process(self, timer):
@@ -34,8 +34,12 @@ class Player:
 
     # playback
 
-    def play(self, track_id=False):
-        if not track_id:
+    def play(self, track_id=False, folder=False):
+        if folder and track_id:
+            self.cmd(0x0F, track_id, highparameter=folder)
+            # NB cmd 0X0F requires folder and track_id params.
+            # 'High' byte and 'Low' byte in the DFRobot C code. 
+        elif not track_id:
             self.resume()
         elif track_id == 'next':
             self.cmd(0x01)

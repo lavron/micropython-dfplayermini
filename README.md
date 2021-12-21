@@ -10,6 +10,7 @@ Module specification and pins reference is [here](https://wiki.dfrobot.com/DFPla
 Playback control:
 ```python
 play(track_id) # track_id, 'next' or 'prev'
+play(track_id, folder)  # track_id in folder (both integers)
 pause()
 resume()
 loop_track(track_id)
@@ -62,6 +63,7 @@ music.fadeout(2000)
 
 music.play(2)
 music.loop()
+music.play(3, 2)  # Plays track 3 in folder 2
 sleep(20)
 
 music.module_sleep()
